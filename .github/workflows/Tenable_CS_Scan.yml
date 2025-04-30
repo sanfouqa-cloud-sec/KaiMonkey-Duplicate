@@ -15,14 +15,11 @@ jobs:
 
     steps:
       # Step 1: Checkout the code in your repository
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      # Step 2: Scan with Ermetic
-      - name: Scan with Ermetic
-        uses: ermetic/actions/iac/scan@v1
-        with:
-          api-token: ${{ secrets.TENABLE_API_TOKEN }}  # GitHub secret containing your Ermetic API token
-          api-url: https://uk.app.ermetic.com  # The Ermetic API URL (update based on your region, if needed)
+    - uses: actions/checkout@v3
+    - name: Scan IaC with Tenable Cloud Security
+      uses: tenable/cloud-security-actions/iac/scan@v1
+      with:
+        api-token: ${{ secrets.TENABLE_API_TOKEN }}
+        api-url: https://uk.app.ermetic.com
 
       # Optional: You can add more steps to handle scan results, notifications, or failure conditions.
